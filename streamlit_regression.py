@@ -10,13 +10,13 @@ model = tf.keras.models.load_model('regression.h5')
 
 # Load the encoders and scaler
 ## load the encoder and scaler
-with open('label_encoder_gender.pkl','rb') as file:
+with open('label_encoder_gender_reg.pkl','rb') as file:
     label_encoder_gender=pickle.load(file)
 
-with open('one_hot_encoder_geo.pkl','rb') as file:
+with open('one_hot_encoder_geo_reg.pkl','rb') as file:
     one_hot_encoder_geo=pickle.load(file)
 
-with open('scaler.pkl','rb') as file:
+with open('scaler_reg.pkl','rb') as file:
     scaler=pickle.load(file)
 
 # Streamlit app
@@ -33,6 +33,7 @@ tenure = st.slider('Tenure',0,10)
 num_of_products = st.slider('Number of Products',1,4)
 has_cr_card= st.selectbox('Has Credit Card',[0,1])
 is_active_member = st.selectbox('Is Active Member',[0,1])
+exited = st.selectbox('Exited',[0,1])
 
 
 # prepare the input data
@@ -46,7 +47,7 @@ input_data = pd.DataFrame(
         'NumOfProducts': [num_of_products],
         'HasCrCard': [has_cr_card],
         'IsActiveMember': [is_active_member],
-        #'EstimatedSalary': [estimated_salary]
+        'Exited':[exited]
 
     }
 )
